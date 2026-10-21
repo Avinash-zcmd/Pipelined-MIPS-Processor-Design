@@ -14,8 +14,8 @@ This project addresses the need for a pipeline design that gives correct results
 2. Implemented data forwarding into the Execute stage from the Memory and Writeback stages (ForwardAE/BE), a one cycle stall for load use hazards, and a 3 instruction flush for taken BEQ branches (flushD/flushE).
 3. Added the MULADD instruction ($rd = $rs*$rt + $rd, funct 0x1C) with a third register file read port and its own forwarding path (ForwardCE) for the accumulator.
 4. Added the perfmon $rt, flag instruction (opcode 0x1D) with a performance monitor module
-   ** flag 0 reads the cycle counter
-   **flag 1 reads the instruction counter, with stall bubbles and flushed instructions excluded from the count.
+   ## flag 0 reads the cycle counter
+   *flag 1* reads the instruction counter, with stall bubbles and flushed instructions excluded from the count.
 5. Verified the design with SystemVerilog testbench that compares every memory write (address and data) against expected values, using 7 directed tests (main, forwarding, BEQ flush, load use, MULADD, perfmon, combined) and reporting CPI and IPC 0.743 on the main 26 instruction program, 0.889 with forwarding, 0.723 with branch flushing.
 6. Synthesized the design with flip flop memories and with SRAM macros SRAM_32x64_1rw in Synopsys Design Compiler using the OSU FreePDK45 library, and compared it with the non pipelined design.
 
